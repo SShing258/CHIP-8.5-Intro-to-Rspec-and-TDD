@@ -54,7 +54,7 @@ class MoviesController < ApplicationController
     flash[:notice] = "#{@movie.title} was successfully added to RottenPotatoes."
     redirect_to '/search' 
   end
-  
+
   private
 
   def force_index_redirect
@@ -75,5 +75,9 @@ class MoviesController < ApplicationController
 
   def sort_by
     params[:sort_by] || session[:sort_by] || 'id'
+  end
+
+  def movie_params
+    params.require(:movie).permit(:title, :rating, :release_date, :description)
   end
 end
